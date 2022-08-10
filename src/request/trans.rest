@@ -22,11 +22,10 @@ DELETE http://localhost:5005/api/transactions/62ee112fc6c5a48abef9a56f
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1bGFkaWNrbyIsImlkIjoiNjJlYWYxNmEyZDI3MzI0NmE1YWNiNWNmIiwiaWF0IjoxNjU5NzY5MTcwfQ.lTywl2laJBc--woY-k3Te6KMFuHciOuKsEEmBsiecYE
 
 ###
-PUT http://localhost:5005/api/transactions/62ee0bce06cbdd272fd3dd73
+PUT http://localhost:5005/api/transactions/62ee112fc6c5a48abef9a56f
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhZWJvdSIsImlkIjoiNjJlYWYyMzQyZDI3MzI0NmE1YWNiNWQyIiwiaWF0IjoxNjU5NzY3NDMzfQ.fQV5j0glurjLczbs9UQM936HQ5hnF70YFQGjLnBUM7Q
 
-{
-  "type": "income",
+{  
   "amount": "4500"
 }
