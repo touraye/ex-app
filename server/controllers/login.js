@@ -11,7 +11,7 @@ loginRouter.post('/', async (req, res) => {
   const user = await User.findOne( { username: username } )
 
 
-  if ( user.status === 'suspend' ) {
+  if ( user && user.status === 'suspend' ) {
     return res.status( 401 ).json( {
       error: 'user is suspended'
     })
