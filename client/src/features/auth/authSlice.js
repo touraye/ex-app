@@ -1,0 +1,91 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import loginService from '../../service/loginService'
+
+const user = localStorage.getItem('authUser')
+
+const initialState = {
+	auth: user ? user : null,
+	isLoading: false,
+	isSuccess: false,
+	isError: false,
+	message: '',
+}
+
+export const login = createAsyncThunk(
+	'auth/login',
+  async ( userData, thunkAPI ) => {
+    console.log(userData);
+		try {
+			return await loginService.login(userData)
+		} catch (error) {
+			const message =
+				(error.response && error.response.message && error.response.data) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+
+export const logout = createAsyncThunk(
+	'auth/logout',
+	async (_, thunkAPI) => {
+		try {
+			return await loginService.logout()
+		} catch (error) {
+			const message =
+				(error.response && error.response.message && error.response.data) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+
+const userSlice = createSlice({
+	name: 'auth',
+	initialState,
+	reducers: {
+		reset(state) {
+			state.isLoading = false
+			state.isSuccess = false
+			state.isError = false
+			state.message = ''
+		},
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(login.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(login.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.auth = action.payload
+			})
+			.addCase(login.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+				state.auth = null
+			})
+			.addCase(logout.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(logout.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.auth = null
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+				state.auth = null
+			})
+	},
+})
+
+export const { reset } = userSlice.actions
+
+export default userSlice.reducer
