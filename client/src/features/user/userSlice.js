@@ -6,10 +6,10 @@ const initialState = {
 	isLoading: false,
 	isSuccess: false,
 	isError: false,
-	message: '',
+	isMessage: '',
 }
 
-export const getUser = createAsyncThunk(
+export const getUsers = createAsyncThunk(
 	'user/get',
 	async (_, thunkAPI) => {
 		try {
@@ -28,10 +28,47 @@ export const register = createAsyncThunk(
 	'user/register',
 	async (user, thunkAPI) => {
 		try {
-			return await userService.registerUser(user)
+			const token = thunkAPI.getState().auth.auth.token			
+			return await userService.registerUser(user, token)
 		} catch (error) {
 			const message =
 				(error.response && error.response.message && error.response.data) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+
+export const deleteUser = createAsyncThunk(
+	'user/delete',
+	async (userId, thunkAPI) => {
+		try {
+			const token = thunkAPI.getState().auth.auth.token
+			return await userService.deleteUser(userId, token)
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+
+export const updateUser = createAsyncThunk(
+	'user/update',
+	async (userData, thunkAPI) => {		
+		try {
+			const token = thunkAPI.getState().auth.auth.token
+			return await userService.updateUser(userData.id, userData, token)
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
 				error.message ||
 				error.toString()
 			return thunkAPI.rejectWithValue(message)
@@ -47,24 +84,24 @@ const userSlice = createSlice({
 			state.isLoading = false
 			state.isSuccess = false
 			state.isError = false
-			state.message = ''
+			state.isMessage = ''
 		},
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(getUser.pending, (state) => {
+			.addCase(getUsers.pending, (state) => {
 				state.isLoading = true
 			})
-			.addCase(getUser.fulfilled, (state, action) => {
+			.addCase(getUsers.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.isSuccess = true
-				state.user = action.payload
+				state.users = action.payload
 			})
-			.addCase(getUser.rejected, (state, action) => {
+			.addCase(getUsers.rejected, (state, action) => {
 				state.isLoading = false
 				state.isError = true
-				state.message = action.payload
-				state.user = null
+				state.isMessage = action.payload
+				state.users = null
 			})
 			.addCase(register.pending, (state) => {
 				state.isLoading = true
@@ -72,13 +109,27 @@ const userSlice = createSlice({
 			.addCase(register.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.isSuccess = true
-				state.user = action.payload
+				state.users.push(action.payload)
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false
 				state.isError = true
-				state.message = action.payload
-				state.user = null
+				state.isMessage = action.payload
+				state.users = null
+			})
+			.addCase(deleteUser.pending, (state) => {
+				console.log(state);
+				state.isLoading = true
+			})
+			.addCase( deleteUser.fulfilled, ( state, action ) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.users = state.users.filter(user => user.id !== action.payload.id)
+			})
+			.addCase(deleteUser.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.isMessage = action.payload				
 			})
 	},
 })

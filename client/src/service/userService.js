@@ -1,24 +1,36 @@
 import axios from 'axios'
 
-const API_URL = '/api/users/'
+const API_URL = 'http://localhost:5000/api/users'
 
 const getUsers = async () => {
 	const response = await axios.get(API_URL)
 	return response.data
 }
 
-const registerUser = async ( userData ) => {
-  const response = await axios.post(API_URL, userData)
+const registerUser = async ( userData, token ) => {	
+		const config = {
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	
+  const response = await axios.post(API_URL, userData, config)
   return response.data
 }
 
-const deleteUser = async (id) => {
-	const response = await axios.delete(`${API_URL}/${id}`)
+const deleteUser = async ( id, token ) => {
+	const config = {
+		headers: { Authorization: `Bearer ${token}` },
+	}
+
+	const response = await axios.delete(`${API_URL}/${id}`, config)
 	return response.data
 }
 
-const updateUser = async (id, userData) => {
-	const response = await axios.put(`${API_URL}/${id}`, userData)
+const updateUser = async ( id, userData, token ) => {
+	const config = {
+		headers: { Authorization: `Bearer ${token}` },
+	}
+
+	const response = await axios.put(`${API_URL}/${id}`, userData, config)
 	return response.data
 }
 

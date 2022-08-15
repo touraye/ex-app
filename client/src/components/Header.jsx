@@ -5,23 +5,23 @@ import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import { logout, reset } from '../features/auth/authSlice'
 
 const Header = () => {    
-  const { auth, isLoading, isSuccess, isMessage, isError, } = useSelector( ( state ) => state.auth )
+  const { auth, isLoading, isSuccess, isMessage, isError, } = useSelector( ( state ) => state.auth )  
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect( () => {
     if ( isError ) {
-      console.log('something went wrong!');
+      alert(isMessage);
     }   
 
     if ( !auth ) {
       navigate('/login')
     }
 
-      if ( auth ) {
-      navigate('/')
-    }
-  }, [ isError, auth, navigate, isSuccess ] )
+    //   if ( auth ) {
+    //   navigate('/')
+    // }
+  }, [ isError, auth, navigate, isSuccess, isMessage ] )
   
   const onLogout = () => {
     dispatch( logout() )
@@ -32,7 +32,7 @@ const Header = () => {
   if(isLoading) return <h1>Loading...</h1>
 
   return (
-    <header>
+    <header className='header'>
       <div className="logo">
         <Link to='/'>
           Expense App
@@ -41,12 +41,11 @@ const Header = () => {
       <ul>
         {
           auth ?
-          <li>
-              <Link to='/login'>
-                <button onClick={onLogout}>
-                  <FaSignOutAlt /> logout
-                </button>
-            </Link>
+            <li>   
+              {auth?.username}  
+              <button onClick={onLogout}>
+                <FaSignOutAlt /> logout
+              </button>            
           </li>
             :
           <li>
