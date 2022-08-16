@@ -1,6 +1,8 @@
 import {useState} from 'react'
-
-const AddTransaction = () => {
+import { useDispatch } from 'react-redux'
+import { createTransaction } from '../features/transaction/transactionSlice'
+const AddTransaction = ( ) => {
+	const dispatch = useDispatch()
   const[name,setName]=useState('')
   const[type,setType]=useState('')
   const [ amount, setAmount ] = useState( '' )
@@ -11,14 +13,11 @@ const AddTransaction = () => {
     if ( type.length === 0 ) {
       return alert('Please select type')
     }
-
-    const newTransaction = {
-      name,
-      type,
-      amount,
-    }
-
-    console.log(newTransaction)
+		
+		dispatch( createTransaction( { name, type, amount } ) )
+		setName('')
+		setType('')
+		setAmount('')
   }
 
 	return (
@@ -42,7 +41,7 @@ const AddTransaction = () => {
 					required>
 					<option>select type</option>
 					<option value='income'>income</option>
-					<option value='income'>expense</option>
+					<option value='expense'>expense</option>
 				</select>
 			</div>
 			<div className='form-control'>

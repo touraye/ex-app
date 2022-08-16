@@ -4,15 +4,6 @@ const User = require( '../models/User' )
 
 // @get Transactions
 transactionRouter.get( '/', async ( req, res ) => {
-  const userFromToken = req.user
-  const foundUser = await User.findById(userFromToken)
-
-  if (foundUser.status === 'suspend') {
-    return res.status(401).json({
-      error: 'unauthorized',
-    })
-  }
-
   const transactions = await Transaction.find().populate('user', { username: 1 })
 
   res.status(200).json(transactions)
