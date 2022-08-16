@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login';
 import Transaction from './pages/Transaction'
 import Users from './pages/Users'
+import Account from './pages/Account';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 						<Route path='/login' element={<Login />} />
 						<Route path='/transactions' element={<Transaction />} />
 						<Route path='/users' element={<Users />} />
+						<Route path='/account' element={<Account />} />
 						<Route path='*' element={<NotFound />} />
 					</Routes>
 				</main>
