@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { getUsers, register, reset } from '../features/user/userSlice'
 
-const AddUser = ( { onAdd, showForm, setShowForm } ) => {  
-	const dispatch = useDispatch()	
+const AddUser = ( { onAdd, showForm, setShowForm } ) => {  	
 	const [username, setUsername] = useState('')
   const [ role, setRole ] = useState( '' )
   const [password, setPassword] = useState('')

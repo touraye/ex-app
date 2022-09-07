@@ -1,22 +1,17 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { FaEdit, FaTrash } from 'react-icons/fa'
-import { deleteUser, getUsers } from '../features/user/userSlice'
+import EditUser from './EditUser'
 
-const User = ( { user, onDelete, showBtn, setShowBtn } ) => { 
-	const [ showEditForm, setShowEditForm ] = useState( false )	
-  const dispatch = useDispatch()
-	const navigate = useNavigate()
-	
-  const onEdit = ( id ) => {
-    
-  }
-  
-	const handleShowEditForm = ( ) => {  }
-	
-  return (
+const User = ( { user, data, onDelete, foundUser } ) => {
+	const [ showEditForm, setshowEditForm ] = useState( false )	
+
+	const handleShowEditForm = () => setshowEditForm(!showEditForm)
+
+	return (
 		<li className='item'>
+			{showEditForm && (
+				<EditUser user={user} handleShowEditForm={handleShowEditForm} data={data} />
+			)}
 			<div className='user-list'>
 				<h4>{user.username}</h4>
 				<div className='user-status'>
@@ -27,21 +22,18 @@ const User = ( { user, onDelete, showBtn, setShowBtn } ) => {
 				</div>
 			</div>
 			<div className='action-container'>
-				{showBtn && (
+				{foundUser.role === 'admin' && (
 					<>
-						{' '}
 						<FaEdit
-							style={{ color: 'green', cursor: 'pointer' }}
-							onClick={ () => {
-								onEdit( user.id )
+							className='icon edit-icon'
+							onClick={() => {								
 								handleShowEditForm()
-							}
-							}
+							}}
 						/>
 						<FaTrash
-							style={{ color: 'red', cursor: 'pointer' }}
+							className='icon trash-icon'
 							onClick={() => onDelete(user.id)}
-						/>{' '}
+						/>
 					</>
 				)}
 			</div>
