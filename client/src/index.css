@@ -1,5 +1,16 @@
 :root {
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --btm-n-sm-size: 14px;
+  --btn-border-raduis: 3px;
+  --primary-clr: #9c88ff;
+  ;
+  --secondary-clr: ;
+  --clr-active: rgba(10, 129, 46, 0.767);
+  --crl-suspend: rgba(129, 28, 28, 0.897);
+  --clr-edit: #555;
+  --clr-trash: rgb(165, 9, 9);
+  --clr-income: rgba(0, 128, 0, 0.658);
+  --clr-expense: rgba(138, 8, 8, 0.651);
 }
 
 * {
@@ -36,6 +47,19 @@ ul li {
   justify-content: space-between;
   padding: .3rem 0;
   height: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .4rem;  
+  font-size: 1.1rem;  
+}
+
+.logo a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
 }
 
 .main {
@@ -113,7 +137,7 @@ input[type='text'],
 input[type='number'],
 input[type='password'], select {
   border: 1px solid #dedede;
-  border-radius: 2px;
+  border-radius: 3px;
   display: block;
   font-size: 16px;
   padding: 10px;
@@ -135,11 +159,23 @@ select {
   margin: 10px 0 30px;
   padding: 10px;
   width: 100%;
+  border-radius: 3px;
+}
+
+/* close btn */
+.close-btn-container {
+  display: flex;
+}
+.close-btn {
+  cursor: pointer;  
+  margin-left: auto;
+  font-size: 20px;  
 }
 
 /* transaction list-item */
 .list {
   margin-bottom: 3rem;
+  position: relative;
 }
 
 .item .tran-type p {
@@ -155,8 +191,12 @@ select {
   -o-border-radius: 10px;
 }
 
+.tran-type {
+  width: 65px;  
+}
+
 .income {
-  background-color: rgba(0, 128, 0, 0.658);  
+  background-color: rgba(0, 128, 0, 0.658);    
 }
 
 .expense {
@@ -169,6 +209,7 @@ select {
   align-items: center;
   gap: 2rem;
 }
+
 .icon {
   cursor: pointer;
   font-size: 19px;
@@ -194,14 +235,23 @@ select {
   position: relative;
 }
 
-.modal {
+
+.modal {  
   position: absolute;
-  top: 80px;
+  top: 10px;
   right: 0;
   left: 0;
   z-index: 100;
   background-color: #777;
   padding: .5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px 1px rgb(189, 176, 176);
+}
+
+.edit-user-modal {
+  top: 0;
+  bottom: 0;
 }
 
 .user-list h4 {
@@ -224,9 +274,10 @@ select {
    color: #fff;
    border: 0;
    display: block;
-   font-size: 13px;
+   font-size: 14px;
    margin: 10px 0 30px;
    padding: .3rem;
+   border-radius: 3px;
 }
 
 .action-container {
@@ -291,7 +342,15 @@ select {
 .profile-list {
   display: flex;
   align-items: center;
-  gap: 1.3rem;
+  gap: 2rem;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 10px;
+  margin: 20px 0 10px;
+  text-transform: capitalize;
+}
+
+.edit-username-icon {  
+  margin-left: auto; 
 }
 
 .profile-card .profile-icon {
@@ -299,10 +358,64 @@ select {
 }
 
 .profile-detail {
+  position: relative;
   border: 1px solid #555;
+  width: 100%;
   border-radius: 5px;
   padding: .5rem;
   margin-top: .4rem;
+}
+
+.profile-icon-small {
+  font-size: 1.3rem;
+  color: rgb(97, 97, 97);
+}
+
+.no-act {
+  cursor:unset;  
+
+}
+
+.logout-deatail {  
+  justify-content: center;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  width: 100px;
+   margin: 5px 0 15px;
+   padding: 10px;
+}
+
+.logout-icon-small {
+  font-size: .6;
+}
+
+.logout-icon-ex-small {
+  font-size: 12px;
+}
+
+/* !Remove */
+.loggedUser-list {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+.loggedUser-list p {
+  text-transform: capitalize;
+}
+
+.logout-btn-sm {
+  margin: 0;
+  padding: 2px;
+  width: 70px;
+  border-radius: 3px;
 }
 
 /* Not Found */
@@ -331,6 +444,8 @@ select {
   left: 0;
   z-index: 100;
   background-color: #979797;
+  max-width: 450px;
+  margin: 0 auto;
 }
 
 .footer ul {
