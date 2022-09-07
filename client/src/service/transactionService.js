@@ -21,7 +21,8 @@ const deleteTransaction = async (id, token) => {
 		headers: { Authorization: `Bearer ${token}` },
 	}
 
-	const response = await axios.delete(`${API_URL}/${id}`, config)
+	const response = await axios.delete( `${API_URL}/${id}`, config )	
+	console.log('response.data', response.data)
 	return response.data
 }
 

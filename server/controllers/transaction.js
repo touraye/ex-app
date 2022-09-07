@@ -88,9 +88,11 @@ transactionRouter.delete( '/:id', async ( req, res ) => {
     })
   }
 
-  await Transaction.findByIdAndRemove(req.params.id)
+  await transaction.remove()
 
-  res.status(204).end()
+  res.status( 200 ).json( {
+    id: req.params.id
+  })
 })
 
 // @ delete Transaction
