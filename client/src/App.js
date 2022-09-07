@@ -4,8 +4,9 @@ import Footer from './components/Footer'
 
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login';
-import Transaction from './pages/Transaction'
+import Transactions from './pages/Transactions'
 import Users from './pages/Users'
+import Chart from './pages/Chart';
 import Account from './pages/Account';
 import NotFound from './pages/NotFound';
 
@@ -18,8 +19,9 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Dashboard />} />
 						<Route path='/login' element={<Login />} />
-						<Route path='/transactions' element={<Transaction />} />
+						<Route path='/transactions' element={<Transactions />} />
 						<Route path='/users' element={<Users />} />
+						<Route path='/statistic' element={<Chart />} />
 						<Route path='/account' element={<Account />} />
 						<Route path='*' element={<NotFound />} />
 					</Routes>
