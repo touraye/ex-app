@@ -82,9 +82,11 @@ userRouter.delete('/:id', async (req, res) => {
     })
   }
 
-  await User.findByIdAndRemove(req.params.id)
+  await user.remove()
 
-  res.status(204).end()
+  res.status( 200 ).json( {
+    id: req.params.id
+  })
 })
 
 // @ delete User
