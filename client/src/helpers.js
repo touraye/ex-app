@@ -1,10 +1,10 @@
 export const curr = ( transactions ) => { 
   const incomeAndExpense = []
   const income = transactions
-		.filter((trans) => trans.type === 'income')
+		?.filter((trans) => trans.type === 'income')
 		.map((trans) => trans.amount)
   const expense = transactions
-		.filter((trans) => trans.type === 'expense')
+		?.filter((trans) => trans.type === 'expense')
 		.map((trans) => trans.amount)
   const currIncome = income.length > 0 && income.reduce((acc, cur) => acc + cur)
   const currExpense =
