@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getTransactions, reset, deleteTransaction } from '../features/transaction/transactionSlice'
 import Transaction from '../components/Transaction'
 
-const Transactions = () => {
+const Transactions = ({transData}) => {
   const { transactions, isLoading, isMessage, isError } = useSelector( ( state ) => state.transaction )     
 
 	const dispatch = useDispatch()		
@@ -26,8 +26,8 @@ const Transactions = () => {
   if(isLoading) <h2>...loading</h2>
   return (
 		<ul className='list'>
-			{transactions ? (
-				transactions.map((tran) => (
+			{transData.length > 0 ? (
+				transData.map((tran) => (
 					<Transaction key={tran.id} tran={tran} onDelete={onDelete} />
 				))
 			) : (

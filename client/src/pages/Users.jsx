@@ -10,7 +10,7 @@ import {
 import AddUser from '../components/AddUser'
 import User from '../components/User'
 
-const Users = () => {
+const Users = ({userData}) => {
 	const { users, isLoading, isMessage, isError } = useSelector( ( state ) => state.user )  
 	const { auth } = useSelector( ( state ) => state )	
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const Users = () => {
 	const [ showForm, setShowForm ] = useState( false ) 	
 	const [showEditForm, setShowEditForm] = useState(false)	
 	const showEdit = ()=> setShowEditForm(!showEditForm)
-	const foundUser = user?.find((u) => u?.username === auth.username)	
+	const foundUser = userData?.find((u) => u?.username === auth.username)	
   
   useEffect(() => {
 		if (!isError) {
@@ -73,12 +73,12 @@ const Users = () => {
 				</div>
 			)}
 			<ul className='list'>
-				{user ? (
-					user?.map((u) => (
+				{userData.length > 0 ? (
+					userData?.map((user) => (
 						<User
-							key={u.id}
+							key={user.id}
 							data={user}
-							user={u}
+							user={user}
 							onDelete={ onDelete }
 							onEdit={ onEdit }
 							foundUser={foundUser}
