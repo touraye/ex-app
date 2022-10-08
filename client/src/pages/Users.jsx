@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers, reset, deleteUser, register } from '../features/user/userSlice'
+import {
+	getUsers,
+	reset,
+	deleteUser,
+	register,
+	updateUser,
+} from '../features/user/userSlice'
 import AddUser from '../components/AddUser'
 import User from '../components/User'
 
@@ -39,6 +45,12 @@ const Users = () => {
 		dispatch(reset())     
 		dispatch(getUsers())     
 	}	
+	
+		const onEdit = (userData) => {
+			dispatch(updateUser(userData))
+			dispatch(reset())
+			dispatch(getUsers())
+		}
   
   if(isLoading) <p>loading..</p>
   
@@ -56,8 +68,7 @@ const Users = () => {
 				<div>
 					<AddUser
 						onAdd={onAdd}
-						showEdit={showEdit}
-						setShowForm={setShowForm}
+						onShowForm={onShowForm}						
 					/>
 				</div>
 			)}
@@ -68,7 +79,8 @@ const Users = () => {
 							key={u.id}
 							data={user}
 							user={u}
-							onDelete={onDelete}
+							onDelete={ onDelete }
+							onEdit={ onEdit }
 							foundUser={foundUser}
 							showEdit={showEdit}
 						/>

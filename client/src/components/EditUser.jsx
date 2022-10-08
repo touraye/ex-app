@@ -1,16 +1,18 @@
 import { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { updateUser, getUsers } from '../features/user/userSlice'
+import { updateUser } from '../features/user/userSlice'
+import { getUsers } from '../features/user/userSlice'
 import { FaTimes } from 'react-icons/fa'
 
-const EditUser = ( { user, data, handleShowEditForm } ) => {	
-	console.log('data', data);
+const EditUser = ( { onEdit, user, data, handleShowEditForm } ) => {		
 	const [username, setUsername] = useState(user.username)
 	const [status, setStatus] = useState(user.status)
 	const [role, setRole] = useState(user.role)
 	const [password, setPassword] = useState(user.role)	
 	
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -26,9 +28,10 @@ const EditUser = ( { user, data, handleShowEditForm } ) => {
 			role,
 			password,
 		}
-
-		dispatch(updateUser(userData))
-		handleShowEditForm()				
+		
+		onEdit( userData )	
+		navigate('/users')
+		handleShowEditForm()	
 	}
 
 	

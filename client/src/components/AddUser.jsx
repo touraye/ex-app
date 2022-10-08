@@ -1,24 +1,24 @@
 import { useState } from 'react'
 
-const AddUser = ( { onAdd, showForm, setShowForm } ) => {  	
+const AddUser = ({ onAdd, onShowForm }) => {
 	const [username, setUsername] = useState('')
-  const [ role, setRole ] = useState( '' )
-  const [password, setPassword] = useState('')
-  const [ password2, setPassword2 ] = useState( '' )	    
+	const [role, setRole] = useState('')
+	const [password, setPassword] = useState('')
+	const [password2, setPassword2] = useState('')
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 
 		if (role.length === 0) {
 			return alert('Please select role')
-    }
-    
-    if (password !== password2) {
+		}
+
+		if (password !== password2) {
 			return alert('Password do not match')
-		}		
-    
-    onAdd( {username, password, role} )    			
-    setShowForm(!showForm)
+		}
+
+		onAdd({ username, password, role })
+		onShowForm()
 	}
 
 	return (
@@ -40,7 +40,7 @@ const AddUser = ( { onAdd, showForm, setShowForm } ) => {
 					value={role}
 					onChange={(e) => setRole(e.target.value)}
 					required>
-					<option >Select role</option>
+					<option>Select role</option>
 					<option value='user'>user</option>
 					<option value='admin'>admin</option>
 				</select>

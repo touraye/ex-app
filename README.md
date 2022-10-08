@@ -1,6 +1,6 @@
-# Express Stater
+# Suma Kalpah App
 
-This is bare born node/express app.
+This app put together your income and express. Financial management is very important a
 
 
 

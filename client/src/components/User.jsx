@@ -1,16 +1,26 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import EditUser from './EditUser'
+import { getUsers, reset, updateUser } from '../features/user/userSlice'
 
-const User = ( { user, data, onDelete, foundUser } ) => {
+const User = ( {onEdit, user, data, onDelete, foundUser } ) => {
 	const [ showEditForm, setshowEditForm ] = useState( false )	
+	const dispatch = useDispatch()
 
 	const handleShowEditForm = () => setshowEditForm(!showEditForm)
+
+
 
 	return (
 		<li className='item'>
 			{showEditForm && (
-				<EditUser user={user} handleShowEditForm={handleShowEditForm} data={data} />
+				<EditUser
+					onEdit={onEdit}
+					user={user}
+					handleShowEditForm={handleShowEditForm}
+					data={data}
+				/>
 			)}
 			<div className='user-list'>
 				<h4>{user.username}</h4>
@@ -26,7 +36,7 @@ const User = ( { user, data, onDelete, foundUser } ) => {
 					<>
 						<FaEdit
 							className='icon edit-icon'
-							onClick={() => {								
+							onClick={() => {
 								handleShowEditForm()
 							}}
 						/>
