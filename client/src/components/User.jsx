@@ -1,16 +1,12 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import EditUser from './EditUser'
-import { getUsers, reset, updateUser } from '../features/user/userSlice'
 
-const User = ( {onEdit, user, data, onDelete, foundUser } ) => {
-	const [ showEditForm, setshowEditForm ] = useState( false )	
-	const dispatch = useDispatch()
+const User = ( { onEdit, user, data, onDelete, foundUser } ) => {
+	console.log('foundUser', foundUser)
+	const [ showEditForm, setshowEditForm ] = useState( false )		
 
 	const handleShowEditForm = () => setshowEditForm(!showEditForm)
-
-
 
 	return (
 		<li className='item'>
@@ -32,7 +28,7 @@ const User = ( {onEdit, user, data, onDelete, foundUser } ) => {
 				</div>
 			</div>
 			<div className='action-container'>
-				{foundUser.role === 'admin' && (
+				{foundUser?.role === 'admin' && (
 					<>
 						<FaEdit
 							className='icon edit-icon'

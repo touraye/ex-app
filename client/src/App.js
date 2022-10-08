@@ -4,8 +4,8 @@ import Footer from './components/Footer'
 
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login';
-import Transactions from './pages/Transactions'
-import Users from './pages/Users'
+import Transactions from './pages/pagination/TransactionPagination'
+import Users from './pages/pagination/UserPagination'
 import Chart from './pages/Chart';
 import Account from './pages/Account';
 import NotFound from './pages/NotFound';

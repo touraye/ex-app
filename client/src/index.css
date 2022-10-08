@@ -34,6 +34,42 @@ ul li {
   list-style-type: none
 }
 
+/* Utilities */
+.d-flex {
+  display: flex;   
+}
+
+.gap-1 {
+  gap: .5rem
+}
+
+.gap-2 {
+  gap: 2rem
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
+.font-medium {
+  font-size: 1
+}
+
+.py-2 {
+  padding: 2px 0;
+}
+
+.px-4 {
+  padding: 0 4px;
+}
+
+/* pagination-container */
+.pagination-container {
+  /* margin: 0;
+  padding: 0; */
+  /* outline: 1px solid; */
+}
+
 .container {
   max-width: 450px;
   margin: 0 auto;  
@@ -64,7 +100,7 @@ ul li {
 
 .main {
   min-height: calc(100vh - (2rem + 3rem));
-  padding: 1rem 0 1rem;  
+  padding: 1rem 0 4rem;  
 }
 
 .balance-text {
@@ -160,6 +196,11 @@ select {
   padding: 10px;
   width: 100%;
   border-radius: 3px;
+}
+
+.btn-sm {
+  font-size: 16px;
+  width: 50px;
 }
 
 /* close btn */

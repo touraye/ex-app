@@ -5,9 +5,10 @@ import EditTransaction from './EditTransaction'
 
 const Transaction = ( {tran, onDelete} ) => {
   const {auth} = useSelector((state)=>state)
-  		const [showEditForm, setshowEditForm] = useState(false)
+  const [showEditForm, setshowEditForm] = useState(false)
 
-			const handleShowEditForm = () => setshowEditForm(!showEditForm)
+	const handleShowEditForm = () => setshowEditForm( !showEditForm )
+	
   return (
 		<li className='item' key={tran.id}>
 			{showEditForm && (
